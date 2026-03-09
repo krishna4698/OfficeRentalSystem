@@ -3,11 +3,15 @@ import CompanySidebar from '../../components/CompanySidebar'
 import CompanyNavbar from '../../components/CompanyNavbar'
 import AddCompanyAnimation from '../../components/AddCompanyPanel'
 import BrowseOffices from './BrowseOffices'
+import { Layout } from '../../../layout'
 function Companydashboard() {
   return (
     <div>
-      <CompanyNavbar/>
+      <Layout>
+         {/* <CompanyNavbar/> */}
      <BrowseOffices/>
+      </Layout>
+     
     </div>
   )
 }
