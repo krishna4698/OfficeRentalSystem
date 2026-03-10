@@ -1,6 +1,7 @@
 import Booking from "../../models/Booking.js";
 import Company from "../../models/Company.js";
 import Office from "../../models/Office.js";
+import Building from  "../../models/Building.js"
 
 
 export const addCompany= async (req,res)=>{
@@ -47,28 +48,51 @@ export const alloffices = async (req, res) => {
   try {
     const { minCapacity, maxPrice , limit} = req.query;
   const page= Number(req.query.page);
+  const search= req.query.search;
+  console.log(search)
     const skip= (page-1)* limit;
     const total= await Office.countDocuments();
+  
 
-    // 1️⃣ Create filter object
-    let filter = {
-      availableStatus: "available" // optional but recommended
+   
+
+
+    let filterorsearch = {
+       availableStatus: "available"
     };
 
-    // 2️⃣ Add capacity filter
     if (minCapacity) {
-      filter.capacity = { $gte: Number(minCapacity) };
+      filterorsearch.capacity = { $gte: Number(minCapacity) };
     }
 
-    // 3️⃣ Add price filter
-    if (maxPrice) {
-      filter.officeRent = { $lte: Number(maxPrice) };
+    if (maxPrice){
+      filterorsearch.officeRent = { $lte: Number(maxPrice) };
     }
 
-    // 4️⃣ Use filter in query
-    const offices = await Office.find(filter).skip(skip).limit(limit)
+  //   if(search){
+  //  filterorsearch.officeNumber= {$regex:search, $options:"i"}
+  //   }
+
+  if(search){
+        //for.. if you search using the buildingName in the browse offices
+
+    const building= await Building.find({address:{$regex:search, $options:"i"}});
+    const buildingIds= building.map(b=>b._id);
+    console.log( "tis is buildin",buildingIds)
+  
+      filterorsearch.buildingId= {$in:buildingIds}
+   
+    
+  }
+
+
+
+    
+    const offices = await Office.find(filterorsearch).skip(skip).limit(limit)
       .populate("buildingId");
-
+      // console.log(offices);
+      
+   
     res.status(200).json({
       data:offices,
       page,
@@ -88,11 +112,12 @@ export const getmyBookings= async (req,res)=>{
   const userid=req.user
   console.log("from getmybookings")
    console.log(userid)
-       const bookings= await Booking.find({userId:userid.id})
+       const bookings= await Booking.find({userId:userid.id}).populate({path:"officeid", populate:{path:"buildingId"}})
        if(!bookings){
         res.json({message:"no bookings exists for this user"})
        }
        console.log(bookings)
+
        res.json(bookings)
 }
 
@@ -113,6 +138,13 @@ export const getmyBookings= async (req,res)=>{
 //             pages:Math.ceil(total/limit),
 //           })
           
-
 // }
 
+export const officeDetail= async (req,res)=>{
+  const id= req.params.officeid;
+  console.log(" this is offcie id",id);
+  
+  const office= await  Office.findById(id).populate("buildingId")
+  console.log(office)
+  res.json(office)
+}
