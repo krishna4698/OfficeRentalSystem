@@ -8,6 +8,11 @@ const userSchema = new mongoose.Schema({
         enum:["admin", "company"],
         default:"company"
      }
+   //   ,
+   //   approvalStatus:{ type:String, required:true,
+   //    enum:["pending", "approved", "rejected"],  
+   //    default:"pending" 
+   //   }
 })
 
 export default mongoose.model("User", userSchema)

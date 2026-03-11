@@ -20,6 +20,7 @@ import BookOffice from './pages/company/BookOffice'
 import MyBookings from './pages/company/MyBookings'
 import MyProfile from './pages/company/MyProfile'
 import GetBookings from './pages/owner/GetBookings'
+import OfficeDetail from './pages/company/OfficeDetail'
 
 
 function App() {
@@ -35,12 +36,15 @@ function App() {
             <Route path='/' element={<AuthLanding/>}/>
            <Route path="/register" element= {<Register/>}/>
            <Route path="/login" element={<Login/>}/>
-           <Route path="/mybookings" element={<MyBookings/>}/>
+
+           
+           <Route path="/company/mybookings" element={<MyBookings/>}/>
            
            <Route path='/company/browseoffices' element={<BrowseOffices/>}/>
           {/* <Route path="/dashboard" element={<ProtectedRoute> <Companydashboard/></ProtectedRoute>}/> */}
-          <Route path='/company/dashboard' element={ <ProtectedRoute role="company"><CompanyDashboard/></ProtectedRoute>}/>
+          <Route path='/company/dashboard' element={ <ProtectedRoute role="company" approvalStatus="approved"><CompanyDashboard/></ProtectedRoute>}/>
           <Route path='/company/dashboard/:officeid/bookoffice' element={ <ProtectedRoute role="company"><BookOffice/></ProtectedRoute>}/>
+          <Route path='/company/dashboard/:officeid/details' element={ <ProtectedRoute role="company"><OfficeDetail/></ProtectedRoute>}/>
            <Route path='/myprofile' element={ <ProtectedRoute role={"company"}><MyProfile/> </ProtectedRoute> }/>
 
 

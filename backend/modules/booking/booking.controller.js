@@ -108,7 +108,7 @@ export const updateBookingStatus = async (req,res)=>{
       await booking.save();
       if(booking.status=="approved"){
         
-        const updateofficestatus = await Office.findByIdAndUpdate(booking.officeid, {
+         await Office.findByIdAndUpdate(booking.officeid, {
           availableStatus:"occupied"
         })
       }

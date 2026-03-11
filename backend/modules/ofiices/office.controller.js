@@ -25,8 +25,8 @@ export const getalloffices=async (req,res)=>{    //this is for if the owner is l
        const id= req.user.id; 
        
     const building= await Building.find({owner:id})
-    console.log("hello")
-    console.log(building);
+    console.log("hello from teh offces modules")
+    // console.log(building);
     
   const buildingIds= building.map(b=>b._id);
 
@@ -34,5 +34,6 @@ export const getalloffices=async (req,res)=>{    //this is for if the owner is l
 
 
     const offices= await Office.find({buildingId:{ $in:buildingIds}}).populate("buildingId")
+    console.log("this is offices of a particular admin", offices)
     res.json(offices)
 }

@@ -40,115 +40,129 @@ function AddOffice() {
     }
   }
 
-  const Field = ({ label, placeholder, value, onChange, type = "text" }) => (
-    <div>
-      <label className="block text-xs text-gray-500 uppercase tracking-widest mb-1.5">
-        {label}
-      </label>
-      <input
-        type={type}
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-        className="w-full border border-gray-200 bg-gray-50 rounded px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 outline-none focus:border-gray-400 focus:bg-white transition-colors"
-      />
-    </div>
-  );
-
   return (
-    <div className="min-h-screen bg-gray-50 flex items-start justify-center pt-16 px-4">
-      <div className="w-full max-w-md">
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center px-4">
 
-        {/* Back button */}
-        <button
-          onClick={() => navigate(-1)}
-          className="flex items-center gap-1.5 text-xs text-gray-400 hover:text-gray-700 transition-colors mb-6"
-        >
-          ← Back to Buildings
-        </button>
+      {/* Card */}
+      <div className="w-full max-w-2xl bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
 
-        {/* Card */}
-        <div className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
-
-          {/* Card header */}
-          <div className="px-6 py-5 border-b border-gray-100">
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 bg-gray-100 rounded-md flex items-center justify-center text-lg">
-                💼
-              </div>
-              <div>
-                <p className="text-xs text-gray-400 uppercase tracking-widest">New Space</p>
-                <h2 className="text-base font-bold text-gray-900">Add Office</h2>
-              </div>
+        {/* Card header */}
+        <div className="px-8 pt-8 pb-6 border-b border-gray-100">
+          <div className="flex items-center gap-4 mb-2">
+            <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center">
+              <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                <path d="M3 21V5a2 2 0 012-2h14a2 2 0 012 2v16M9 21v-6h6v6" />
+              </svg>
             </div>
-          </div>
-
-          {/* Building ID badge */}
-          <div className="px-6 pt-5">
-            <div className="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded px-3 py-2 mb-5">
-              <span className="text-xs text-gray-400">Building ID:</span>
-              <span className="text-xs font-mono font-medium text-gray-700 truncate">{buildingId}</span>
+            <div>
+              <h2 className="text-2xl font-bold text-gray-900">Add New Office</h2>
+              <p className="text-sm text-gray-400 mt-0.5">Fill in the details below to register a new workspace in your inventory.</p>
             </div>
-          </div>
-
-          {/* Form fields */}
-          <div className="px-6 pb-5 flex flex-col gap-4">
-            <Field
-              label="Office Number"
-              placeholder="e.g. A-101"
-              value={officeNumber}
-              onChange={(e) => setOfficeNumber(e.target.value)}
-            />
-            <Field
-              label="Floor"
-              placeholder="e.g. 3rd"
-              value={floor}
-              onChange={(e) => setFloor(e.target.value)}
-            />
-            <div className="grid grid-cols-2 gap-4">
-              <Field
-                label="Capacity"
-                placeholder="e.g. 10"
-                type="number"
-                value={capacity}
-                onChange={(e) => setCapacity(e.target.value)}
-              />
-              <Field
-                label="Office Rent"
-                placeholder="e.g. 5000"
-                type="number"
-                value={officeRent}
-                onChange={(e) => setOfficeRent(e.target.value)}
-              />
-            </div>
-
-            {/* Error */}
-            {error && (
-              <div className="flex items-center gap-2 bg-red-50 border border-red-100 rounded px-3 py-2">
-                <span className="text-red-400 text-sm">⚠</span>
-                <p className="text-xs text-red-500">{error}</p>
-              </div>
-            )}
-          </div>
-
-          {/* Footer actions */}
-          <div className="px-6 py-4 border-t border-gray-100 bg-gray-50 flex gap-3">
-            <button
-              onClick={handleAddOffice}
-              disabled={loading}
-              className="flex-1 bg-black text-white text-sm font-semibold py-2.5 rounded hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {loading ? "Adding..." : "+ Add Office"}
-            </button>
-            <button
-              onClick={() => navigate(-1)}
-              className="text-sm text-gray-500 border border-gray-200 px-4 py-2.5 rounded hover:bg-gray-100 hover:text-gray-800 transition-colors"
-            >
-              Cancel
-            </button>
           </div>
         </div>
+
+        {/* Form */}
+        <div className="px-8 py-6 flex flex-col gap-5">
+
+          {/* Row 1 — Office Number + Floor */}
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">Office Number</label>
+              <div className="flex items-center gap-2 border border-gray-200 bg-gray-50 rounded-xl px-4 py-3 focus-within:border-blue-400 focus-within:bg-white transition-colors">
+                <span className="text-gray-400 font-bold text-sm">#</span>
+                <input
+                  type="text"
+                  placeholder="e.g. OF-101"
+                  value={officeNumber}
+                  onChange={(e) => setOfficeNumber(e.target.value)}
+                  className="bg-transparent text-sm text-gray-900 placeholder-gray-400 outline-none w-full"
+                />
+              </div>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">Floor</label>
+              <div className="flex items-center gap-2 border border-gray-200 bg-gray-50 rounded-xl px-4 py-3 focus-within:border-blue-400 focus-within:bg-white transition-colors">
+                <svg className="w-4 h-4 text-gray-400 shrink-0" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                  <path d="M5 12h14M5 6h14M5 18h14" />
+                </svg>
+                <input
+                  type="text"
+                  placeholder="e.g. 5"
+                  value={floor}
+                  onChange={(e) => setFloor(e.target.value)}
+                  className="bg-transparent text-sm text-gray-900 placeholder-gray-400 outline-none w-full"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Row 2 — Capacity + Rent */}
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">Capacity (People)</label>
+              <div className="flex items-center gap-2 border border-gray-200 bg-gray-50 rounded-xl px-4 py-3 focus-within:border-blue-400 focus-within:bg-white transition-colors">
+                <svg className="w-4 h-4 text-gray-400 shrink-0" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+                </svg>
+                <input
+                  type="number"
+                  placeholder="e.g. 10"
+                  value={capacity}
+                  onChange={(e) => setCapacity(e.target.value)}
+                  className="bg-transparent text-sm text-gray-900 placeholder-gray-400 outline-none w-full"
+                />
+              </div>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">Monthly Rent</label>
+              <div className="flex items-center gap-2 border border-gray-200 bg-gray-50 rounded-xl px-4 py-3 focus-within:border-blue-400 focus-within:bg-white transition-colors">
+                <span className="text-gray-400 text-sm font-medium">₹</span>
+                <input
+                  type="number"
+                  placeholder="0.00"
+                  value={officeRent}
+                  onChange={(e) => setOfficeRent(e.target.value)}
+                  className="bg-transparent text-sm text-gray-900 placeholder-gray-400 outline-none w-full"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Error */}
+          {error && (
+            <div className="flex items-center gap-2 bg-red-50 border border-red-100 rounded-xl px-4 py-3">
+              <span className="text-red-400">⚠</span>
+              <p className="text-sm text-red-500">{error}</p>
+            </div>
+          )}
+        </div>
+
+        {/* Footer */}
+        <div className="px-8 py-5 border-t border-gray-100 flex items-center justify-end gap-3">
+          <button
+            onClick={() => navigate(-1)}
+            className="text-sm font-medium text-gray-600 px-6 py-2.5 rounded-xl border border-gray-200 hover:bg-gray-50 transition-colors"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={handleAddOffice}
+            disabled={loading}
+            className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-6 py-2.5 rounded-xl flex items-center gap-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+              <path d="M5 13l4 4L19 7" />
+            </svg>
+            {loading ? "Adding..." : "Add Office"}
+          </button>
+        </div>
       </div>
+
+      {/* Footer note */}
+      <p className="text-xs text-gray-400 mt-5">
+        ℹ Need help? Contact our{" "}
+        <span className="text-blue-500 cursor-pointer hover:underline">Support Center</span>
+      </p>
     </div>
   );
 }

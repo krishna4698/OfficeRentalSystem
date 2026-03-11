@@ -49,7 +49,7 @@ export const alloffices = async (req, res) => {
     const { minCapacity, maxPrice , limit} = req.query;
   const page= Number(req.query.page);
   const search= req.query.search;
-  console.log(search)
+  console.log("this is ",search)
     const skip= (page-1)* limit;
     const total= await Office.countDocuments();
   
@@ -81,8 +81,6 @@ export const alloffices = async (req, res) => {
     console.log( "tis is buildin",buildingIds)
   
       filterorsearch.buildingId= {$in:buildingIds}
-   
-    
   }
 
 

@@ -36,7 +36,7 @@ import cookieParser from "cookie-parser";
 
 export const authmiddleware = (req, res, next) => {
   try {
-    const cookieToken = req.cookies.token; // 🍪 READ COOKIE
+    const cookieToken = req.cookies.token; 
     console.log("Cookie token:", cookieToken);
 
     if (!cookieToken) {

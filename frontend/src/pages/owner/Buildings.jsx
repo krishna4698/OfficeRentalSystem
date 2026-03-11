@@ -76,7 +76,7 @@ function Buildings() {
               </div>
               <div>
                 <p className="font-bold text-gray-900 text-sm leading-tight">Admin Portal</p>
-                <p className="text-xs text-gray-400">Office Management</p>
+                <p className="text-xs text-gray-400">Building Management</p>
               </div>
             </div>
           </div>

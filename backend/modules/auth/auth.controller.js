@@ -3,6 +3,7 @@ import User from "../../models/User.js"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import {OAuth2Client} from "google-auth-library"
+import "dotenv/config"
 
 
 
@@ -13,7 +14,7 @@ import {OAuth2Client} from "google-auth-library"
 
 
 export const register= async (req,res)=>{
-    const{ name, email, password, role}= req.body;
+    const{ name, email, password, role, approvalStatus}= req.body;
     
     try{
           const user= await User.findOne({email})
@@ -21,7 +22,7 @@ export const register= async (req,res)=>{
         res.json({mesaage:"user is already registerd"})
     }
 
-    if(!name || !password || !role || !email){
+    if(!name || !password || !role || !email ){
         res.json({message:"all fields are required"})
     }
      const hashedpassword= await bcrypt.hash(password, 10)
@@ -30,6 +31,8 @@ export const register= async (req,res)=>{
         password:hashedpassword,
         role,
         name
+        // ,
+        // approvalStatus
     })
     res.json({mesaage:"User is registerd", newUser} )
     
@@ -62,7 +65,8 @@ export const login= async(req,res)=>{
         {
             id:user._id,
             email:user.email,
-            role:user.role
+            role:user.role,
+            approvalStatus:user.approvalStatus,
         },
         "secret",
         {expiresIn:"7h"}
@@ -105,8 +109,8 @@ export const Logout= async (req,res)=>{
 
 
 // const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
-const  GOOGLE_CLIENT_ID="332907425455-lr7rnd2a4oi4fopd20nss1vdq51k0huc.apps.googleusercontent.com"
-const client = new OAuth2Client(GOOGLE_CLIENT_ID);
+// const  GOOGLE_CLIENT_ID="332907425455-lr7rnd2a4oi4fopd20nss1vdq51k0huc.apps.googleusercontent.com"
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 export const googleAuth = async (req, res) => {
   try {
@@ -115,7 +119,7 @@ export const googleAuth = async (req, res) => {
        
     const ticket = await client.verifyIdToken({
       idToken: token,
-      audience:GOOGLE_CLIENT_ID,
+      audience:process.env.GOOGLE_CLIENT_ID,
     });
     // console.log("tis is ticket", ticket)
 

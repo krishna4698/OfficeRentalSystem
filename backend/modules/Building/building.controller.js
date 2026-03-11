@@ -34,6 +34,10 @@ export const getMyBuildings= async (req,res)=>{
 
 }
 
+export const getByBuildingId= (req,res)=>{
+    
+}
+
 export const  Bookings= async (req,res)=>{
     const user= req.user.id
     console.log(user)

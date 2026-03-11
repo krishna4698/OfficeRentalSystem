@@ -30,7 +30,7 @@ const AddCompanyAnimation = () => {
       {/* Add Company Button */}
       <button
         onClick={() => setOpen(true)}
-        className="bg-black text-white px-6 py-2 rounded"
+        className="bg-blue-600 text-white px-6 py-2 rounded"
       >
         Add Company
       </button>
@@ -79,7 +79,7 @@ const AddCompanyAnimation = () => {
                 />
               </div>
 
-              <button className="w-full bg-black text-white py-2 rounded" onClick={Add}>
+              <button className="w-full bg-blue-500 text-white py-2 rounded" onClick={Add}>
                 Save Company
               </button>
             </form>
