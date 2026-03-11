@@ -5,7 +5,7 @@ import { useAuth } from "../../context/AuthContext";
 import OfficeFilter from "../../components/OfficeFilter";
 import Pagination from "../../components/Pagination";
 import { useSearchParams } from "react-router-dom";
-
+import API from "../../api.js"
 function BrowseOffices() {
   const { user } = useAuth();
   const [params] = useSearchParams();
@@ -18,7 +18,7 @@ function BrowseOffices() {
   useEffect(() => {
     const fetchOffices = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/alloffices", {
+        const res = await axios.get(`${API}/alloffices`, {
           params: { limit: 5, page, search, ...filter },
           withCredentials: true,
         });

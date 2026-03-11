@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import API from "../../api.js"
 
 function AddOffice() {
   const { buildingId } = useParams();
@@ -22,7 +23,7 @@ function AddOffice() {
     try {
       setLoading(true);
       await axios.post(
-        "http://localhost:3000/office/create",
+        `${API}/office/create`,
         {
           officeNumber,
           floor,

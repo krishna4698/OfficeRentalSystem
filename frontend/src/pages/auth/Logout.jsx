@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React from 'react'
+import API from "../../api.js"
 import { useNavigate } from 'react-router-dom'
 
 
@@ -11,7 +12,7 @@ const logout= async(req,res)=>{
 
     
     try{
-        const res= await axios.post("http://localhost:3000/auth/logout",{}, {withCredentials:true})
+        const res= await axios.post(`${API}/auth/logout`,{}, {withCredentials:true})
         if(res){
                      navigate("/login")
            

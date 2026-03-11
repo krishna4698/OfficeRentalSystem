@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-
+import API from "../../api.js"
 function GetBookings() {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -12,7 +12,7 @@ function GetBookings() {
     const fetchBookings = async () => {
       try {
         setLoading(true);
-        const res = await axios.get("http://localhost:3000/getbookings", { withCredentials: true });
+        const res = await axios.get(`${API}/getbookings`, { withCredentials: true });
         setBookings(res.data);
       } catch (e) {
         console.log("the error is", e);
@@ -28,7 +28,7 @@ function GetBookings() {
     try {
       setActionLoading(bookingId);
       await axios.patch(
-        "http://localhost:3000/booking/updatebooking",
+        `${API}/booking/updatebooking`,
         { bookingId, action },
         { withCredentials: true }
       );

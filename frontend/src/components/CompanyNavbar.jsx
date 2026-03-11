@@ -4,7 +4,7 @@ import axios from "axios";
 import { useAuth } from "../context/AuthContext";
 import { useState, useRef, useEffect } from "react";
 import MyAccountDropdown from "./MyAccountDropdown";
-
+import API from "../api";
 
 export default function CompanyNavbar() {
   const [accountOpen, setAccountOpen] = useState(false);
@@ -33,7 +33,7 @@ export default function CompanyNavbar() {
   async function logout() {
     try {
       const response = await axios.post(
-        "http://localhost:3000/auth/logout",
+        `${API}/auth/logout`,
         {},
         { withCredentials: true }
       );

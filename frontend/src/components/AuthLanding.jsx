@@ -2,7 +2,7 @@ import { use, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
-
+import API from "../api.js"
 const stats = [
   { value: "500+", label: "Offices Listed" },
   { value: "120+", label: "Buildings" },
@@ -98,7 +98,7 @@ export default function AuthLanding() {
 
   useEffect(() => {
     async function getOffices() {
-      const offices = await axios.get("http://localhost:3000/alloffices",{params:{search:search} , withCredentials: true });
+      const offices = await axios.get(`${API}/alloffices`,{params:{search:search} , withCredentials: true });
     
       console.log("from landing", offices);
       setOffice(offices.data.data);

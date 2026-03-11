@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "react-toastify";
 import axios from "axios";
+import API from "../api";
 
 const AddCompanyAnimation = () => {
   const [open, setOpen] = useState(false);
@@ -9,7 +10,7 @@ const AddCompanyAnimation = () => {
   const[address, setAddress]= useState("")
 
   async function Add(){
-    await  axios.post("http://localhost:3000/addcompany", 
+    await  axios.post(`${API}/addcompany`, 
         {
             companyName, address
 

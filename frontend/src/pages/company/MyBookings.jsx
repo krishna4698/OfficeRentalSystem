@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate, NavLink } from "react-router-dom";
-
+import API from "../../api";
 function MyBookings() {
   const navigate = useNavigate();
   const { user } = useAuth();
@@ -12,7 +12,7 @@ function MyBookings() {
   useEffect(() => {
     const fetchBookings = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/getmybookings", {
+        const res = await axios.get(`${API}/getmybookings`, {
           withCredentials: true,
         });
         console.log("from my bookings", res);

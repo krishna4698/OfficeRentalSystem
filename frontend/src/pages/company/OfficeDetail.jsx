@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import { useNavigate, useParams } from 'react-router-dom';
-
+import API from "../../api.js"
 function OfficeDetail() {
   const navigate = useNavigate();
   const { officeid } = useParams();
@@ -11,7 +11,7 @@ function OfficeDetail() {
   useEffect(() => {
     async function getoffice() {
       try {
-        const res = await axios.get(`http://localhost:3000/officedetials/${officeid}`, { withCredentials: true });
+        const res = await axios.get(`${API}/officedetials/${officeid}`, { withCredentials: true });
         setOffice(res.data);
         console.log(res.data);
       } catch (e) {

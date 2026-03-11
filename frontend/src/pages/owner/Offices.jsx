@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import API from "../../api.js"
 
-// ── SIDEBAR LINKS (same as dashboard) ─────────────────────────────────────────
 const sidebarLinks = [
   {
     label: "Dashboard", to: "/admin/dashboard",
@@ -41,7 +41,7 @@ const Offices = () => {
     const fetchOffices = async () => {
       try {
         setLoading(true);
-        const res = await axios.get("http://localhost:3000/office/getoffices", { withCredentials: true });
+        const res = await axios.get(`${API}/office/getoffices`, { withCredentials: true });
         setOffices(res.data);
       } catch (err) {
         console.error(err);
@@ -55,7 +55,7 @@ const Offices = () => {
 
   async function logout() {
     try {
-      await axios.post("http://localhost:3000/auth/logout", {}, { withCredentials: true });
+      await axios.post(`${API}/auth/logout`, {}, { withCredentials: true });
       setUser(null);
       navigate("/login", { replace: true });
     } catch (e) { console.error(e); }

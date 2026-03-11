@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import API from "../api";
 
 function CreateOffice() {
   const [formData, setFormData] = useState({
@@ -27,7 +28,7 @@ function CreateOffice() {
 
     try {
       await axios.post(
-        "http://localhost:3000/offices",
+        `${API}/offices`,
         formData,
         { withCredentials: true }
       );

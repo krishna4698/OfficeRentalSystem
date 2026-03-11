@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { toast } from "react-toastify";
+import API from "../../api.js"
 
 function BookOffice() {
   const { officeid } = useParams();
@@ -22,7 +23,7 @@ function BookOffice() {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "http://localhost:3000/booking/create",
+        `${API}/booking/create`,
         {
           officeid,
           startdate: formData.startdate,

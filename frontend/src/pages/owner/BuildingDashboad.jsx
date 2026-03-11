@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../../context/AuthContext";
-
+import API from "../../api.js"
 function BuildingDashboard() {
   const navigate = useNavigate();
   const { user } = useAuth();
@@ -14,8 +14,8 @@ function BuildingDashboard() {
     async function fetchStats() {
       try {
         const [offRes, bkRes] = await Promise.all([
-          axios.get("http://localhost:3000/office/getoffices",  { withCredentials: true }),
-          axios.get("http://localhost:3000/getbookings",  { withCredentials: true }),
+          axios.get(`${API}/office/getoffices`,  { withCredentials: true }),
+          axios.get(`${API}/getbookings`,  { withCredentials: true }),
         ]);
            setOffices(offRes.data);
         setBookings(bkRes.data);
@@ -31,7 +31,7 @@ function BuildingDashboard() {
 
   // useEffect(()=>{
   //     const getoffices= async ()=>{
-  //    const res=   await axios.get("http://localhost:3000/getbookings", {withCredentials: true});
+  //    const res=   await axios.get("${API}/getbookings", {withCredentials: true});
   //    console.log("this is res",res);
   //       setBookings(res.data)
   //     }
@@ -111,14 +111,14 @@ function BuildingDashboard() {
 
   async function handleApprove(id) {
     try {
-      await axios.patch(`http://localhost:3000/admin/bookings/${id}/approve`, {}, { withCredentials: true });
+      await axios.patch(`${API}/admin/bookings/${id}/approve`, {}, { withCredentials: true });
       setBookings((prev) => prev.map((b) => b._id === id ? { ...b, status: "approved" } : b));
     } catch (e) { console.error(e); }
   }
 
   async function handleReject(id) {
     try {
-      await axios.patch(`http://localhost:3000/admin/bookings/${id}/reject`, {}, { withCredentials: true });
+      await axios.patch(`${API}/admin/bookings/${id}/reject`, {}, { withCredentials: true });
       setBookings((prev) => prev.map((b) => b._id === id ? { ...b, status: "rejected" } : b));
     } catch (e) { console.error(e); }
   }

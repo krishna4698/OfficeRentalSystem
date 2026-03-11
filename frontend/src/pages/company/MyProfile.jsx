@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useAuth } from '../../context/AuthContext'
 import axios from 'axios';
+import API from "../../api.js"
 
  function MyProfile() {
     // const [company, setCompany] = useState({});
@@ -12,8 +13,8 @@ import axios from 'axios';
 
     const fetchcompany= async ()=>{
     try{
-      //  const response= await axios.get("http://localhost:3000/mycompany", {withCredentials:true})
-       const response= await axios.get("http://localhost:3000/auth/me", {withCredentials:true})
+      //  const response= await axios.get("${API}/mycompany", {withCredentials:true})
+       const response= await axios.get(`${API}/auth/me`, {withCredentials:true})
        console.log(response.data[0]);
        
           if(response.status==200) {

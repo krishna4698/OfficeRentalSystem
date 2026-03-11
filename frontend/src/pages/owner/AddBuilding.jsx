@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-
+import API from "../../api.js"
 function AddBuilding() {
   const [buildingName, setBuildingName] = useState("");
   const [address, setAddress] = useState("");
@@ -11,7 +11,7 @@ function AddBuilding() {
       setLoading(true);
 
       const res = await axios.post(
-        "http://localhost:3000/registerbuilding",
+        `${API}/registerbuilding`,
         {
           buildingName,
           address,

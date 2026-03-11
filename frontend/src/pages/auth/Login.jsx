@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
 import { toast } from "react-toastify";
 import { useAuth } from '../../context/AuthContext';
-
+import API from "../../api.js"
 function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -17,7 +17,7 @@ function Login() {
 
   async function loginRequest() {
     try {
-      const response = await axios.post("http://localhost:3000/auth/login", {
+      const response = await axios.post(`${API}/auth/login`, {
         email, password
       }, {
         withCredentials: true,
@@ -151,7 +151,7 @@ function Login() {
               <GoogleLogin
                 onSuccess={async (credentialResponse) => {
                   try {
-                    await axios.post("http://localhost:3000/auth/google", {
+                    await axios.post(`${API}/auth/google`, {
                       token: credentialResponse.credential,
                     }, { withCredentials: true });
                     window.location.href = "/company/dashboard";

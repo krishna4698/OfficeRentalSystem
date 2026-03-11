@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-
+import API from "../../api.js"
 const sidebarLinks = [
   {
     label: "Dashboard", to: "/admin/dashboard",
@@ -37,7 +37,7 @@ function Buildings() {
     try {
       setLoading(true);
       setError("");
-      const res = await axios.get("http://localhost:3000/getmybuildings", { withCredentials: true });
+      const res = await axios.get(`${API}/getmybuildings`, { withCredentials: true });
       setBuildings(res.data);
     } catch (err) {
       console.error(err);
@@ -51,7 +51,7 @@ function Buildings() {
 
   async function logout() {
     try {
-      await axios.post("http://localhost:3000/auth/logout", {}, { withCredentials: true });
+      await axios.post(`${API}/auth/logout`, {}, { withCredentials: true });
       setUser(null);
       navigate("/login", { replace: true });
     } catch (e) { console.error(e); }
