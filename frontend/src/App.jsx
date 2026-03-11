@@ -3,7 +3,7 @@ import { useState } from 'react'
 import './App.css'
 import Register from './pages/auth/Register'
 import AuthLanding from './components/AuthLanding'
-import CreateOffice from './components/Createoffice'
+
 import {Routes, Route, BrowserRouter} from "react-router-dom"
 import Login from './pages/auth/Login'
 import BrowseOffices from './pages/company/BrowseOffices'
