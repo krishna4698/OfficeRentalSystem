@@ -34,10 +34,14 @@ app.use("/booking", bookingroute)
 app.use("superadmin", superadminroute)
 
 app.use(authmiddleware)
+app.get("/test",(req,res)=>{
+    res.json("working right")
+})
 
 app.get("/protected", (req,res)=>{
     res.json("protected route")
 })
+
 
 
 DB().then(()=>{
