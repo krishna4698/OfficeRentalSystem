@@ -1,6 +1,6 @@
 import mongoose from "mongoose"
 
-mongoose.connect("mongodb://localhost:27017/officeRentalSystem")
+
 
 const companySchema= new mongoose.Schema({
     companyName:{type:String, required:true},

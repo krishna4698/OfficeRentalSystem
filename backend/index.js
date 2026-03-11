@@ -1,5 +1,6 @@
 import express from "express"
 import cors from "cors"
+import DB from "./config/db.js";
 // import cookieParser from "cookie-parser";
 
 import  registerRoute from "./routes/auth.route.js";
@@ -20,8 +21,6 @@ app.use(cors({
     credentials:true
 }))
 
-
-
 app.use(express.json());
 
 app.use(cookieParser())
@@ -41,6 +40,8 @@ app.get("/protected", (req,res)=>{
 })
 
 
-app.listen(3000,()=>{
+DB().then(()=>{
+    app.listen(3000,()=>{
     console.log("server is running on 3000 port")
 })
+})  
