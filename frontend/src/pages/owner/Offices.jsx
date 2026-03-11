@@ -145,18 +145,9 @@ const Offices = () => {
       {/* ── MAIN ── */}
       <div className="flex-1 flex flex-col min-w-0">
 
-        {/* Top bar */}
         <div className="bg-white border-b border-gray-200 px-8 py-3 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-xl px-4 py-2 w-96">
-            <svg className="w-4 h-4 text-gray-400 shrink-0" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-              <circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" />
-            </svg>
-            <input
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search offices, buildings, or locations..."
-              className="bg-transparent text-sm text-gray-600 placeholder-gray-400 outline-none w-full"
-            />
+          <div className="flex items-center -xl px-4 py-2 w-96">
+            
           </div>
           <div className="flex items-center gap-3">
             <button className="w-9 h-9 flex items-center justify-center rounded-xl hover:bg-gray-100 transition-colors relative">
