@@ -1,30 +1,50 @@
-# 🏢 Office Rental System
+# 🏢 Office Rental System  (More to come Stay tuned) 
 
-A full-stack web application that allows companies to browse and book office spaces, while admins manage buildings, offices, and booking approvals.
+A full-stack web application that allows companies to browse and book office spaces, while admins manage buildings and offices. A SuperAdmin oversees the entire platform by approving or rejecting admin registrations.
 
 🔗 **Live Demo:** [office-rental-system.vercel.app](https://office-rental-system.vercel.app)
 
 ---
 
+## 👥 User Roles
+
+```
+SuperAdmin
+    └── Approves / Rejects Admin registrations
+    
+Admin (Owner)
+    └── Adds buildings & offices
+    └── Approves / Rejects company bookings
+    
+Company
+    └── Browses & books office spaces
+```
+
+---
+
 ## ✨ Features
 
-### 👤 Admin
-- Register & login as admin
+### 🔑 SuperAdmin
+- Approve or reject admin/owner registration requests
+- Full platform oversight
+
+### 👤 Admin (Owner)
+- Register & login (requires SuperAdmin approval)
 - Add buildings and offices
-- View all bookings
-- Approve or reject booking requests
+- View all booking requests
+- Approve or reject bookings from companies
 
 ### 🏬 Company
-- Register & login as company
+- Register & login
 - Browse available office spaces
 - View office details
 - Book an office for a date range
 - View booking history
 
-### 🔐 Auth
+### 🔐 Authentication
 - JWT based authentication
 - Cookie based sessions
-- Role based access (Admin / Company)
+- Role based access control (SuperAdmin / Admin / Company)
 
 ---
 
@@ -133,6 +153,13 @@ npm run dev
 | POST | `/auth/login` | Login user |
 | POST | `/auth/logout` | Logout user |
 
+### SuperAdmin
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/superadmin/pendingadmins` | Get all pending admin requests |
+| PATCH | `/superadmin/approve/:id` | Approve admin registration |
+| PATCH | `/superadmin/reject/:id` | Reject admin registration |
+
 ### Buildings (Admin)
 | Method | Endpoint | Description |
 |--------|----------|-------------|
@@ -157,6 +184,21 @@ npm run dev
 
 ---
 
+## 🔄 Registration Flow
+
+```
+Admin registers
+      ↓
+Status: "pending"
+      ↓
+SuperAdmin reviews
+      ↓
+Approved ✅ → Admin can login and manage offices
+Rejected ❌ → Admin cannot access the platform
+```
+
+---
+
 ## 🌍 Deployment
 
 - **Frontend** → [Vercel](https://vercel.com)
@@ -171,3 +213,7 @@ npm run dev
 - GitHub: [@krishna4698](https://github.com/krishna4698)
 
 ---
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
