@@ -17,8 +17,13 @@ const app= express();
 
 
 app.use(cors({
-    origin:"http://localhost:5173",
-    credentials:true
+  origin: [
+    "https://office-rental-system.vercel.app",
+    "https://office-rental-sy-git-e8a1ff-krishnajoshi4698-gmailcoms-projects.vercel.app",
+    "https://office-rental-system-nhzp7v3xn.vercel.app",
+    "http://localhost:5173"  
+  ],
+  credentials: true
 }))
 
 app.use(express.json());
